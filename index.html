@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bitacora Cyber | Diario tecnico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-mode="public">
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegacion principal">
+      <a class="brand" href="#dashboard" aria-label="Ir al dashboard">
+        <span class="brand-mark">CS</span>
+        <span>
+          <strong>Bitacora Cyber</strong>
+          <small>Diario tecnico</small>
+        </span>
+      </a>
+
+      <nav class="nav-stack">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#diario">Bitacora diaria</a>
+        <a href="#timeline">Timeline</a>
+        <a href="#labs">Laboratorios</a>
+        <a href="#projects">Proyectos</a>
+        <a href="#goals">Metas</a>
+      </nav>
+
+      <div class="sidebar-card">
+        <span class="status-dot"></span>
+        <p id="storage-note">Vista publica de solo lectura.</p>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <section class="hero-dashboard" id="dashboard">
+        <img src="assets/hero-cybersecurity.png" alt="Estacion de estudio de ciberseguridad" />
+        <div class="hero-shade"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">Registro vivo de aprendizaje</p>
+          <h1>Mi evolucion como estudiante de ciberseguridad</h1>
+          <p>Estudiante de ciberseguridad construyendo experiencia práctica día a día mediante laboratorios, proyectos y aprendizaje continuo.</p>
+        </div>
+      </section>
+
+      <section class="kpi-grid" aria-label="Estadisticas principales">
+        <article class="kpi-card">
+          <span>Dias consecutivos</span>
+          <strong id="stat-streak">0</strong>
+        </article>
+        <article class="kpi-card">
+          <span>Horas acumuladas</span>
+          <strong id="stat-hours">0</strong>
+        </article>
+        <article class="kpi-card">
+          <span>Laboratorios</span>
+          <strong id="stat-labs">0</strong>
+        </article>
+        <article class="kpi-card">
+          <span>Proyectos finalizados</span>
+          <strong id="stat-projects">0</strong>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel span-7">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Areas</p>
+              <h2>Nivel de avance</h2>
+            </div>
+            <button class="ghost-button admin-only" id="reset-demo" type="button">Restaurar ejemplo</button>
+          </div>
+          <div id="area-progress" class="area-progress"></div>
+        </article>
+
+        <article class="panel span-5">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Foco</p>
+              <h2>Areas mas trabajadas</h2>
+            </div>
+          </div>
+          <div id="top-areas" class="top-areas"></div>
+        </article>
+
+        <article class="panel span-6" id="goals">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Direccion</p>
+              <h2>Metas</h2>
+            </div>
+          </div>
+          <div class="goal-columns">
+            <div>
+              <h3>Corto plazo</h3>
+              <ul id="short-goals" class="clean-list"></ul>
+            </div>
+            <div>
+              <h3>Largo plazo</h3>
+              <ul id="long-goals" class="clean-list"></ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel span-6">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Tecnologias</p>
+              <h2>Stack de aprendizaje</h2>
+            </div>
+          </div>
+          <div id="tech-tags" class="tag-cloud"></div>
+        </article>
+      </section>
+
+      <section class="workspace-grid" id="diario">
+        <form class="panel form-panel admin-only" id="entry-form">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Bitacora diaria</p>
+              <h2>Nueva entrada</h2>
+            </div>
+          </div>
+          <input type="hidden" id="entry-id" />
+          <div class="form-grid">
+            <label>Fecha
+              <input id="entry-date" type="date" required />
+            </label>
+            <label>Horas de estudio
+              <input id="entry-hours" type="number" min="0" step="0.5" placeholder="2" required />
+            </label>
+            <label>Area principal
+              <select id="entry-area" required></select>
+            </label>
+            <label>Herramientas o tecnologias
+              <input id="entry-tools" type="text" placeholder="Wireshark, Nmap, Linux" />
+            </label>
+          </div>
+          <label>Que estudie hoy
+            <textarea id="entry-studied" rows="3" required></textarea>
+          </label>
+          <label>Que aprendi
+            <textarea id="entry-learned" rows="3" required></textarea>
+          </label>
+          <label>Dificultades encontradas
+            <textarea id="entry-difficulties" rows="3"></textarea>
+          </label>
+          <label>Como resolvi los problemas
+            <textarea id="entry-solutions" rows="3"></textarea>
+          </label>
+          <label>Proximos pasos
+            <textarea id="entry-next" rows="3"></textarea>
+          </label>
+          <div class="form-actions">
+            <button class="primary-button" type="submit">Guardar entrada</button>
+            <button class="ghost-button" id="cancel-entry-edit" type="button">Cancelar edicion</button>
+          </div>
+        </form>
+
+        <section class="panel list-panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Historial</p>
+              <h2>Entradas registradas</h2>
+            </div>
+            <select id="entry-filter" aria-label="Filtrar entradas por area">
+              <option value="all">Todas las areas</option>
+            </select>
+          </div>
+          <div id="entries-list" class="entry-list"></div>
+        </section>
+      </section>
+
+      <section class="panel" id="timeline">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Evolucion</p>
+            <h2>Timeline de aprendizaje</h2>
+          </div>
+          <form id="milestone-form" class="inline-form admin-only">
+            <input id="milestone-date" type="date" required />
+            <select id="milestone-type" required>
+              <option value="Hito">Hito</option>
+              <option value="Laboratorio">Laboratorio</option>
+              <option value="Proyecto">Proyecto</option>
+              <option value="Certificacion">Certificacion</option>
+            </select>
+            <input id="milestone-title" type="text" placeholder="Nuevo hito" required />
+            <button class="primary-button" type="submit">Agregar</button>
+          </form>
+        </div>
+        <div id="timeline-list" class="timeline-list"></div>
+      </section>
+
+      <section class="workspace-grid" id="labs">
+        <form class="panel form-panel admin-only" id="lab-form">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Practica</p>
+              <h2>Registrar laboratorio</h2>
+            </div>
+          </div>
+          <input type="hidden" id="lab-id" />
+          <div class="form-grid">
+            <label>Fecha
+              <input id="lab-date" type="date" required />
+            </label>
+            <label>Titulo
+              <input id="lab-title" type="text" placeholder="Analisis de trafico HTTP" required />
+            </label>
+          </div>
+          <label>Objetivo
+            <textarea id="lab-objective" rows="2" required></textarea>
+          </label>
+          <label>Herramientas utilizadas
+            <input id="lab-tools" type="text" placeholder="Wireshark, Kali, DVWA" />
+          </label>
+          <label>Procedimiento
+            <textarea id="lab-procedure" rows="4"></textarea>
+          </label>
+          <label>Resultados
+            <textarea id="lab-results" rows="3"></textarea>
+          </label>
+          <label>Lecciones aprendidas
+            <textarea id="lab-lessons" rows="3"></textarea>
+          </label>
+          <label>Adjuntar captura
+            <input id="lab-image" type="file" accept="image/*" />
+          </label>
+          <div class="form-actions">
+            <button class="primary-button" type="submit">Guardar laboratorio</button>
+            <button class="ghost-button" id="cancel-lab-edit" type="button">Cancelar edicion</button>
+          </div>
+        </form>
+
+        <section class="panel list-panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Evidencia</p>
+              <h2>Laboratorios documentados</h2>
+            </div>
+          </div>
+          <div id="labs-list" class="lab-list"></div>
+        </section>
+      </section>
+
+      <section class="panel" id="projects">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Construccion</p>
+            <h2>Catalogo de proyectos</h2>
+          </div>
+        </div>
+        <form id="project-form" class="project-form admin-only">
+          <input type="hidden" id="project-id" />
+          <input id="project-title" type="text" placeholder="Nombre del proyecto" required />
+          <select id="project-status" required>
+            <option value="Planificado">Planificado</option>
+            <option value="En progreso">En progreso</option>
+            <option value="Finalizado">Finalizado</option>
+          </select>
+          <input id="project-tech" type="text" placeholder="Tecnologias utilizadas" />
+          <input id="project-start" type="date" required />
+          <input id="project-end" type="date" />
+          <input id="project-link" type="url" placeholder="Enlace al proyecto o repositorio" />
+          <textarea id="project-summary" rows="2" placeholder="Resumen corto del proyecto"></textarea>
+          <textarea id="project-objective" rows="2" placeholder="Objetivo"></textarea>
+          <textarea id="project-procedure" rows="3" placeholder="Procedimiento o desarrollo tecnico"></textarea>
+          <textarea id="project-results" rows="3" placeholder="Resultados obtenidos"></textarea>
+          <textarea id="project-lessons" rows="3" placeholder="Lecciones aprendidas"></textarea>
+          <button class="primary-button" type="submit">Guardar proyecto</button>
+        </form>
+        <div id="projects-list" class="projects-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <template id="item-actions-template">
+    <div class="item-actions">
+      <button class="ghost-button edit-button" type="button">Editar</button>
+      <button class="danger-button delete-button" type="button">Eliminar</button>
+    </div>
+  </template>
+
+  <script src="published-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
